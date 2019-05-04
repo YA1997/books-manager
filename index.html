@@ -6,104 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>图书管理系统</title>
-    <link rel="stylesheet" href="index.css">
+    <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/md5.js"></script>
 </head>
 
 <body>
     <div class="main">
-        <ul class="tab">
-            <li class="on">查询图书</li>
-            <li>加入新书</li>
-            <li>更新图书</li>
-            <li>删除图书</li>
-        </ul>
+        <div class="title">Login</div>
         <div class="input">
-            <form action="search_book.php" method="POST">
-                <p><strong>选择查询类型:</strong><br>
-                    <select name="searchtype">
-                        <option value="Author">作者</option>
-                        <option value="Title">书名</option>
-                        <option value="ISBN">ISBN</option>
-                    </select>
-                </p>
-                <p><strong>输入查询内容:</strong><br>
-                    <input type="text" name="searchterm" class="inputText">
-                </p>
-                <button type="submit">查询</button><button type="reset" class="reset">清空</button>
+            <form action="login_book.php" method="POST">
+                <input type="text" class="inputText" name="uid" placeholder="请输入用户名" required="required">
+                <input type="password" class="inputText" name="pwd" id="pwd" placeholder="请输入密码" required="required">
+                <div class="buttons"><button type="submit" onclick="md5pwd()">登陆</button><button type="reset" class="reset">重置</button></div> 
             </form>
-        </div>
-        <div class="input hide">
-            <form action="insert_book.php" method="POST">
-                <input type="text" class="inputText" name="ISBN" placeholder="ISBN">
-                <input type="text" class="inputText" name="Author" placeholder="作者">
-                <input type="text" class="inputText" name="Title" placeholder="书名">
-                <input type="text" class="inputText" name="Price" placeholder="价格">
-                <button type="submit">添加</button><button type="reset" class="reset">清空</button>
-            </form>
-        </div>
-        <div class="input hide">
-            <form action="update_book.php" method="POST">
-                <p><strong>选择你要修改的书:</strong><br>
-                    <select name="searchtype">
-                        <option value="Author">作者</option>
-                        <option value="Title">书名</option>
-                        <option value="ISBN">ISBN</option>
-                    </select>
-                </p>
-                <p><strong>输入相应信息:</strong><br>
-                    <input type="text" name="searchterm" class="inputText">
-                </p>
-                <p><strong>选择你要修改的内容:</strong><br>
-                    <select name="updatetype">
-                        <option value="Author">作者</option>
-                        <option value="Title">书名</option>
-                        <option value="ISBN">ISBN</option>
-                        <option value="Price">价格</option>
-                    </select>
-                </p>
-                <p><strong>输入相应信息:</strong><br>
-                    <input type="text" name="updateterm" class="inputText">
-                </p>
-                <button type="submit">修改</button><button type="reset" class="reset">清空</button>
-            </form>
-
-        </div>
-        <div class="input hide">
-            <form action="delete_book.php" method="POST">
-                <p><strong>选择要删除图书的信息:</strong><br>
-                    <select name="searchtype">
-                        <option value="Author">作者</option>
-                        <option value="Title">书名</option>
-                        <option value="ISBN">ISBN</option>
-                    </select>
-                </p>
-                <p><strong>输入对应内容:</strong><br>
-                    <input type="text" name="searchterm" class="inputText">
-                </p>
-                <button type="submit">删除</button><button type="reset" class="reset">清空</button>
-            </form>
+            <div class="register">还没有账号？点击注册<a href="register.html">注册</a></div>
+            <div class="register">忘记密码？点击找回<a href="resetpwd.html">找回</a></div>
         </div>
     </div>
 
-    <script type="text/javascript">
-        // JS实现选项卡切换
-        window.onload = function () {
-            var oul = document.getElementsByTagName("ul")[0];
-            var oli = oul.getElementsByTagName("li");
-            var odiv = document.getElementsByClassName("input");
-            for (var i = 0; i < oli.length; i++) {
-                oli[i].index = i;
-                oli[i].onclick = function () {
-                    for (var j = 0; j < oli.length; j++) {
-                        oli[j].classList.remove("on");
-                        odiv[j].classList.add("hide");
-                    }
-                    this.classList.add("on");
-                    odiv[this.index].classList.remove("hide");
-                }
-            }
+    <script>
+        var pwd = document.getElementById("pwd");
+        function md5pwd(){
+            pwd.value = hex_md5(pwd.value);
+            
         }
-
     </script>
 </body>
 

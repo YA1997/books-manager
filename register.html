@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/md5.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="title">Register</div>
+        <div class="input">
+            <form action="register_book.php" method="POST">
+                <input type="text" class="inputText" name="uid" placeholder="请输入用户名" required="required">
+                <input type="password" class="inputText" name="pwd" placeholder="请输入密码" required="required">
+                <input type="password" class="inputText" name="pwd2" placeholder="请再次输入密码" required="required">
+                <input type="email" class="inputText" name="email" placeholder="请输入邮箱地址" required="required">
+                <div class="buttons">
+                    
+                    <button type="submit" onmouseover="checkpwd()" onclick="md5pwd()">注册</button>
+                    <button type="reset" class="reset">重置</button>
+                    <a href="index.html">👈👈👈前去登陆</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var inputs = document.getElementsByClassName("inputText");
+        function checkpwd() {
+            if (inputs[1].value != inputs[2].value) {
+                alert("两次输入的密码不一致，请重新输入");
+            }
+        }
+        function md5pwd(){
+            inputs[1].value = inputs[2].value = hex_md5(inputs[1].value);
+        }
+        
+    </script>
+</body>
+
+</html>

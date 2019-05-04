@@ -9,6 +9,26 @@ body {
     background-size: cover;
 }
 
+header {
+    /* height: 60px; */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    border-bottom: 10px solid rgba(0, 0, 0, 0.6);
+}
+header a,header .username{
+    color: aliceblue;
+    float: right;
+}
+header>.touxiang {
+    /* margin: 15px 20px; */
+    width: 98%;
+    height: 30px;
+    /* background-color: blanchedalmond; */
+}
+
+
 .main {
     width: 400px;
     min-height: 400px;

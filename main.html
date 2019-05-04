@@ -8,9 +8,18 @@
     <title>图书管理系统</title>
     <!-- <link rel="stylesheet" href="css/normalize.css"> -->
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-3.4.0.js"></script>
 </head>
 
 <body>
+    <header>
+        <div class="touxiang">
+            <a href="javascript:;" id='logout'>logout</a>
+            <div class="username">username</div>
+        </div>
+
+    </header>
+
     <div class="main">
         <ul class="tab">
             <li class="on">查询图书</li>
@@ -30,8 +39,9 @@
                 <p><strong>输入查询内容:</strong><br>
                     <input type="text" name="searchterm" class="inputText">
                 </p>
-                <div class="buttons"><button type="submit">查询</button><button type="reset" class="reset">重置</button></div> 
-                
+                <div class="buttons"><button type="submit">查询</button><button type="reset" class="reset">重置</button>
+                </div>
+
             </form>
         </div>
         <div class="input hide">
@@ -40,7 +50,8 @@
                 <input type="text" class="inputText" name="Author" placeholder="作者">
                 <input type="text" class="inputText" name="Title" placeholder="书名">
                 <input type="text" class="inputText" name="Price" placeholder="价格">
-                <div class="buttons"><button type="submit">添加</button><button type="reset" class="reset">重置</button></div>                 
+                <div class="buttons"><button type="submit">添加</button><button type="reset" class="reset">重置</button>
+                </div>
             </form>
         </div>
         <div class="input hide">
@@ -66,8 +77,9 @@
                 <p><strong>输入相应信息:</strong><br>
                     <input type="text" name="updateterm" class="inputText">
                 </p>
-                <div class="buttons"><button type="submit">修改</button><button type="reset" class="reset">重置</button></div> 
-                
+                <div class="buttons"><button type="submit">修改</button><button type="reset" class="reset">重置</button>
+                </div>
+
             </form>
 
         </div>
@@ -83,13 +95,55 @@
                 <p><strong>输入对应内容:</strong><br>
                     <input type="text" name="searchterm" class="inputText">
                 </p>
-                <div class="buttons"><button type="submit">删除</button><button type="reset" class="reset">重置</button></div> 
-                
+                <div class="buttons"><button type="submit">删除</button><button type="reset" class="reset">重置</button>
+                </div>
+
             </form>
         </div>
     </div>
 
     <script type="text/javascript">
+        //顶部显示与隐藏
+        $('header').hover(function () {
+            // over
+            $('.touxiang').stop().slideDown(100);
+        }, function () {
+            // out
+            $('.touxiang').stop().slideUp(100);
+        });
+        //获取用户id
+        $.ajax({
+            type: "post",
+            url: "checklog.php",
+            data: "flag=checklog",
+            dataType: "text",
+            success: function (res) {
+                if(res=='notlogged'){
+                    alert('请先登录');
+                    window.location.href="index.html";
+                }
+                $('.username').html('hello,' + res+'&nbsp;&nbsp;');
+                console.log(res);
+            },
+            error: function () {
+                alert('失败')
+            }
+        });
+        //用户退出
+        $('#logout').click(function (e) { 
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "checklog.php",
+                data: "flag=logout",
+                dataType: "text",
+                success: function (res) {
+                    alert('您已退出');
+                    window.location.href="index.html";
+                }
+            });
+        });
+
         // JS实现选项卡切换
         window.onload = function () {
             var oul = document.getElementsByTagName("ul")[0];
